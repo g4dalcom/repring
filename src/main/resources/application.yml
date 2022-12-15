@@ -37,4 +37,4 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        dialect: org.hibernate.dialect.MySQL570Dialect
+        dialect: org.hibernate.dialect.MySQL57Dialect
