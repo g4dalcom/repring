@@ -21,10 +21,15 @@ public class TestController {
             @ApiResponse(responseCode = "200", description = "success"),
             @ApiResponse(responseCode = "400", description = "bad request")
     })
-    @GetMapping("/hello")
+    @GetMapping("/test")
     public ResponseEntity<String> getTest(@Parameter(description = "파라미터", required = true, example = "예시")
                                           @RequestParam String name) {
 
         return ResponseEntity.ok("Hello " + name);
+    }
+
+    @GetMapping("/hello")
+    public ResponseEntity<String> getHello() {
+        return ResponseEntity.ok("Success!!");
     }
 }
