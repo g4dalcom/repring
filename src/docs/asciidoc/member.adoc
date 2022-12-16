@@ -1,0 +1,4 @@
+== 유저
+
+=== 유저 정보 조회
+operation::get-member[snippets='http-request,http-response']
