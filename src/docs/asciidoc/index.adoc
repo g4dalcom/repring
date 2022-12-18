@@ -7,3 +7,4 @@
 :sectlinks:
 
 include::member.adoc[]
+include::post.adoc[]

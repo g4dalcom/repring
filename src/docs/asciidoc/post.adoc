@@ -1,0 +1,4 @@
+== 게시글
+
+=== 게시글 등록
+operation::post/create/success[snippets='http-request,http-response']

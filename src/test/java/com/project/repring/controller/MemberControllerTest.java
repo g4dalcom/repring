@@ -2,15 +2,13 @@ package com.project.repring.controller;
 
 import com.project.repring.domain.Member;
 import com.project.repring.repository.MemberRepository;
+import com.project.repring.util.ControllerTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Optional;
@@ -25,12 +23,8 @@ import static org.springframework.restdocs.request.RequestDocumentation.paramete
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
-@SpringBootTest
-@AutoConfigureMockMvc // MockMvc 자동 설정
-@AutoConfigureRestDocs // rest docs 자동 설정
-@ExtendWith(MockitoExtension.class)
-class MemberControllerTest {
+@ExtendWith(RestDocumentationExtension.class)
+class MemberControllerTest extends ControllerTest {
     @Autowired
     MockMvc mockMvc;
 

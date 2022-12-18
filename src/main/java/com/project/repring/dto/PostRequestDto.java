@@ -24,6 +24,7 @@ public class PostRequestDto {
         this.content = content;
     }
 
+    /* DB에 등록할 때 쓰기 위한 DTO -> Entity 변환 메서드 */
     public Post toEntity() {
         return Post.builder()
                 .title(title)

@@ -1,9 +1,24 @@
 package com.project.repring.service;
 
+import com.project.repring.domain.Post;
 import com.project.repring.dto.PostRequestDto;
+import com.project.repring.repository.PostRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-public interface PostService {
+@Service
+@RequiredArgsConstructor
+public class PostService {
+    private final PostRepository postRepository;
 
-    Long createPost(PostRequestDto requestDto);
+    @Transactional
+    public Long createPost(PostRequestDto requestDto) {
+
+        Post post = requestDto.toEntity();
+        postRepository.save(post);
+
+        return post.getId();
+    }
 
 }
