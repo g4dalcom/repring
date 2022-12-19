@@ -2,3 +2,9 @@
 
 === 게시글 등록
 operation::post/create/success[snippets='http-request,http-response']
+
+=== 게시글 전체 조회
+operation::post/find/all/success[snippets='http-request,http-response']
+
+=== 게시글 단일 조회
+operation::post/find/one/success[snippets='http-request,http-response']

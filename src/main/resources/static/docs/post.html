@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<title>REST Docs Practice Application API Document</title>
+<title>게시글</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -435,73 +435,21 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 #footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="book toc2 toc-left">
+<body class="article">
 <div id="header">
-<h1>REST Docs Practice Application API Document</h1>
-<div class="details">
-<span id="revnumber">version 0.0.1-SNAPSHOT</span>
-</div>
-<div id="toc" class="toc2">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_유저">유저</a>
-<ul class="sectlevel2">
-<li><a href="#_유저_정보_조회">유저 정보 조회</a></li>
-</ul>
-</li>
-<li><a href="#_게시글">게시글</a>
-<ul class="sectlevel2">
-<li><a href="#_게시글_등록">게시글 등록</a></li>
-<li><a href="#_게시글_전체_조회">게시글 전체 조회</a></li>
-<li><a href="#_게시글_단일_조회">게시글 단일 조회</a></li>
-</ul>
-</li>
-</ul>
-</div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_유저"><a class="link" href="#_유저">유저</a></h2>
+<h2 id="_게시글">게시글</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_유저_정보_조회"><a class="link" href="#_유저_정보_조회">유저 정보 조회</a></h3>
+<h3 id="_게시글_등록">게시글 등록</h3>
 <div class="sect3">
-<h4 id="_유저_정보_조회_http_request"><a class="link" href="#_유저_정보_조회_http_request">HTTP request</a></h4>
+<h4 id="_게시글_등록_http_request">HTTP request</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/members/1 HTTP/1.1
-Accept: application/json
-Host: localhost:8080</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_유저_정보_조회_http_response"><a class="link" href="#_유저_정보_조회_http_response">HTTP response</a></h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Content-Type: application/json
-Content-Length: 33
-
-{"id":1,"email":null,"name":null}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_게시글"><a class="link" href="#_게시글">게시글</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_게시글_등록"><a class="link" href="#_게시글_등록">게시글 등록</a></h3>
-<div class="sect3">
-<h4 id="_게시글_등록_http_request"><a class="link" href="#_게시글_등록_http_request">HTTP request</a></h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/posts HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/posts HTTP/1.1
 Content-Type: application/json
 Content-Type: application/json
 Content-Length: 60
@@ -515,22 +463,22 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect3">
-<h4 id="_게시글_등록_http_response"><a class="link" href="#_게시글_등록_http_response">HTTP response</a></h4>
+<h4 id="_게시글_등록_http_response">HTTP response</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 201 Created
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 201 Created
 Location: /0</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_게시글_전체_조회"><a class="link" href="#_게시글_전체_조회">게시글 전체 조회</a></h3>
+<h3 id="_게시글_전체_조회">게시글 전체 조회</h3>
 <div class="sect3">
-<h4 id="_게시글_전체_조회_http_request"><a class="link" href="#_게시글_전체_조회_http_request">HTTP request</a></h4>
+<h4 id="_게시글_전체_조회_http_request">HTTP request</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/posts HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /api/posts HTTP/1.1
 Content-Type: application/json
 Content-Type: application/json
 Host: localhost:8080</code></pre>
@@ -538,10 +486,10 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_게시글_전체_조회_http_response"><a class="link" href="#_게시글_전체_조회_http_response">HTTP response</a></h4>
+<h4 id="_게시글_전체_조회_http_response">HTTP response</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
 Content-Length: 3
 
@@ -551,12 +499,12 @@ Content-Length: 3
 </div>
 </div>
 <div class="sect2">
-<h3 id="_게시글_단일_조회"><a class="link" href="#_게시글_단일_조회">게시글 단일 조회</a></h3>
+<h3 id="_게시글_단일_조회">게시글 단일 조회</h3>
 <div class="sect3">
-<h4 id="_게시글_단일_조회_http_request"><a class="link" href="#_게시글_단일_조회_http_request">HTTP request</a></h4>
+<h4 id="_게시글_단일_조회_http_request">HTTP request</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/posts/1 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /api/posts/1 HTTP/1.1
 Content-Type: application/json
 Content-Type: application/json
 Host: localhost:8080</code></pre>
@@ -564,10 +512,10 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_게시글_단일_조회_http_response"><a class="link" href="#_게시글_단일_조회_http_response">HTTP response</a></h4>
+<h4 id="_게시글_단일_조회_http_response">HTTP response</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
 Content-Length: 84
 
@@ -586,11 +534,8 @@ Content-Length: 84
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-12-18 20:26:33 +0900
+Last updated 2022-12-19 15:44:50 +0900
 </div>
 </div>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
-<script>hljs.initHighlighting()</script>
 </body>
 </html>

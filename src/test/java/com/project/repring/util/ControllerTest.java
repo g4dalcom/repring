@@ -7,6 +7,7 @@ import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import io.restassured.module.mockmvc.specification.MockMvcRequestSpecification;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.restdocs.RestDocumentationContextProvider;
@@ -21,13 +22,14 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
         PostController.class,
         MemberController.class
 })
+@AutoConfigureRestDocs
 @ExtendWith(RestDocumentationExtension.class)
 public class ControllerTest {
 
     protected MockMvcRequestSpecification restDocs;
 
     @MockBean
-    PostService postService;
+    public PostService postService;
 
     /**
      * @param webApplicationContext @AutoConfigureMockMvc 로 구현 가능

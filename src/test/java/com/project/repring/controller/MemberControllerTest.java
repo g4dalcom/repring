@@ -32,7 +32,7 @@ class MemberControllerTest extends ControllerTest {
     private MemberRepository memberRepository;
 
     @Test
-    public void getMember() throws Exception {
+    public void findMember() throws Exception {
         Member member1 = Member.builder()
                 .id(1L)
                 .email("user1@email.com")
