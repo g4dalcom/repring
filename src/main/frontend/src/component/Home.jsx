@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import Header from "./Header";
 
 function Home() {
     const [posts, setPosts] = useState([]);
@@ -23,15 +24,18 @@ function Home() {
     }, []);
 
     return (
-        <div className="card">
+        <div>
+            <Header />
             <ul>
                 {posts.map(post => {
                     return (
-                        <li key={post.id}>
-                            <div className="postTitle">{post.title}</div>
-                            <div className="postContent">{post.content}</div>
-                            <button value={post.id} onClick={() => onDeleteHandler(post.id)}>삭제하기</button>
-                        </li>
+                        <div className="card">
+                            <li key={post.id}>
+                                <div className="postTitle">{post.title}</div>
+                                <div className="postContent">{post.content}</div>
+                                <button value={post.id} onClick={() => onDeleteHandler(post.id)}>삭제하기</button>
+                            </li>
+                        </div>
                     )
                 })}
             </ul>
