@@ -36,11 +36,17 @@ const StText = styled.h3`
 
 const StLogo = styled.div`
     margin-right: auto;
-    margin-left: 20px;
+    margin-left: 200px;
     cursor: pointer;
+    &:hover {
+        color: white;
+    }
 `;
 
 const StLoginBtn = styled.div`
-    margin-right: 20px;
+    margin-right: 200px;
     cursor: pointer;
+    &:hover {
+        color: white;
+    }
 `;
