@@ -1,46 +1,22 @@
-import React, {useEffect, useState} from "react";
-import axios from "axios";
+import React from "react";
 import Header from "./Header";
+import Card from "./Card";
+import styled from "styled-components";
 
-function Home() {
-    const [posts, setPosts] = useState([]);
-
-    const onDeleteHandler = async (id) => {
-        await axios.delete(`http://localhost:8080/api/posts/${id}`);
-        window.location.reload();
-    };
-
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const response = await axios.get("http://localhost:8080/api/posts");
-                setPosts(response.data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        fetchData();
-    }, []);
-
+const Home = () => {
     return (
-        <div>
+        <StHome>
             <Header />
-            <ul>
-                {posts.map(post => {
-                    return (
-                        <div className="card">
-                            <li key={post.id}>
-                                <div className="postTitle">{post.title}</div>
-                                <div className="postContent">{post.content}</div>
-                                <button value={post.id} onClick={() => onDeleteHandler(post.id)}>삭제하기</button>
-                            </li>
-                        </div>
-                    )
-                })}
-            </ul>
-        </div>
+            <Card />
+        </StHome>
     )
 }
 
 export default Home;
+
+const StHome = styled.div`
+    width: 100%;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+`;

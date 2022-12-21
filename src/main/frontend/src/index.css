@@ -16,14 +16,6 @@ li {
   list-style: none;
 }
 
-.main-div {
-  width: 60%;
-  margin: 50px;
-}
-
-.card {
-  border: mediumpurple solid 3px;
-  margin: 10px auto;
-  width: 150px;
-  height: 300px;
+ul {
+  padding: 0;
 }
