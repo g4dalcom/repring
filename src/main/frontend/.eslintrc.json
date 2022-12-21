@@ -1,0 +1,11 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": ["react_app", "plugin:prettier/recommended"],
+  "rules": {
+    "import/no-anonymous-default-export": "off"
+  }
+}
