@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import styled from "styled-components";
+import AddCard from "./AddCard";
 
 function Card() {
 
@@ -39,6 +40,7 @@ function Card() {
         <>
             <StBackGround>
                 {postCard}
+                <AddCard />
             </StBackGround>
         </>
 
@@ -51,12 +53,13 @@ const StCard = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100px;
+    flex-direction: column;
+    width: 200px;
     height: 350px;
     border: 1px solid black;
     border-radius: 5px;
     padding: 5px;
-    margin: 130px 30px;
+    margin: 200px 30px;
 `;
 
 const StBackGround = styled.div`

@@ -5,6 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-color: #F7F7F7;
+  height: 1250px;
 }
 
 code {
@@ -18,4 +21,8 @@ li {
 
 ul {
   padding: 0;
+}
+
+#root {
+  height: 1250px;
 }
