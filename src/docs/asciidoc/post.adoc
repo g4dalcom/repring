@@ -8,3 +8,9 @@ operation::post/find/all/success[snippets='http-request,http-response']
 
 === 게시글 단일 조회
 operation::post/find/one/success[snippets='http-request,http-response']
+
+=== 게시글 수정
+operation::post/update/success[snippets='http-request,http-response']
+
+=== 게시글 삭제
+operation::post/delete/success[snippets='http-request,http-response']

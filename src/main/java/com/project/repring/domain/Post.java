@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,7 +23,8 @@ public class Post extends BaseEntity {
     @Column(nullable = false)
     private String content;
 
-    private int viewCount = 0;
+    @OneToMany(mappedBy = "comment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Comment> commentList = new ArrayList<>();
 
     protected Post() {
     }

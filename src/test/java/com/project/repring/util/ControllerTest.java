@@ -1,7 +1,9 @@
 package com.project.repring.util;
 
+import com.project.repring.controller.CommentController;
 import com.project.repring.controller.MemberController;
 import com.project.repring.controller.PostController;
+import com.project.repring.service.CommentService;
 import com.project.repring.service.PostService;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import io.restassured.module.mockmvc.specification.MockMvcRequestSpecification;
@@ -20,7 +22,8 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 
 @WebMvcTest({
         PostController.class,
-        MemberController.class
+        MemberController.class,
+        CommentController.class
 })
 @AutoConfigureRestDocs
 @ExtendWith(RestDocumentationExtension.class)
@@ -30,6 +33,9 @@ public class ControllerTest {
 
     @MockBean
     public PostService postService;
+
+    @MockBean
+    public CommentService commentService;
 
     /**
      * @param webApplicationContext @AutoConfigureMockMvc 로 구현 가능
