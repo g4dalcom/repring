@@ -2,3 +2,12 @@
 
 === 코멘트 등록
 operation::comment/create/success[snippets='http-request,http-response']
+
+=== 코멘트 조회
+operation::comment/find/success[snippets='http-request,http-response']
+
+=== 게시글 수정
+operation::comment/update/success[snippets='http-request,http-response']
+
+=== 게시글 삭제
+operation::comment/delete/success[snippets='http-request,http-response']

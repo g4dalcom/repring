@@ -1,5 +1,6 @@
 package com.project.repring.domain;
 
+import com.project.repring.dto.CommentRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -27,5 +28,9 @@ public class Comment extends BaseEntity {
     public Comment(final String comment, final Post post) {
         this.comment = comment;
         this.post = post;
+    }
+
+    public void update(final CommentRequestDto commentRequestDto) {
+        this.comment = commentRequestDto.getComment();
     }
 }

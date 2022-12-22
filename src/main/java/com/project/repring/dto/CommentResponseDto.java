@@ -7,21 +7,22 @@ import lombok.Getter;
 @Getter
 public class CommentResponseDto {
 
-    private Long id;
-    private String comment;
+    private final Long id;
+    private final String comment;
 
-    public CommentResponseDto() {
-    }
+    private final Long postId;
 
     @Builder
-    public CommentResponseDto(final Long id, final String comment) {
+    public CommentResponseDto(final Long id, final String comment, final Long postId) {
         this.id = id;
         this.comment = comment;
+        this.postId = postId;
     }
 
     public static CommentResponseDto of(Comment comment) {
         return CommentResponseDto.builder()
                 .comment(comment.getComment())
+                .postId(comment.getPost().getId())
                 .build();
     }
 }
