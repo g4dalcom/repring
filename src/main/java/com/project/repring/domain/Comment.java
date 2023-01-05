@@ -1,13 +1,16 @@
 package com.project.repring.domain;
 
 import com.project.repring.dto.CommentRequestDto;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment extends BaseEntity {
 
     @Id
@@ -20,9 +23,6 @@ public class Comment extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
-
-    protected Comment() {
-    }
 
     @Builder
     public Comment(final String comment, final Post post) {

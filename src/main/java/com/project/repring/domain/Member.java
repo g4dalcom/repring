@@ -1,30 +1,32 @@
 package com.project.repring.domain;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
-    private String name;
+    @Column(nullable = false, unique = true)
+    private String nickname;
 
-    protected Member() {
-    }
+    @Column(nullable = false)
+    private String password;
 
     @Builder
-    public Member(Long id, String email, String name) {
-        this.id = id;
+    public Member(final String email, final String nickname, final String password) {
         this.email = email;
-        this.name = name;
+        this.nickname = nickname;
+        this.password = password;
     }
 }

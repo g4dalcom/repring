@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import Modal from "./Modal";
 import styled from "styled-components";
 
-const AddCard = () => {
+const AddPost = () => {
 
     const [modalUp, setModalUp] = useState(false);
 
@@ -18,7 +18,7 @@ const AddCard = () => {
     )
 }
 
-export default AddCard;
+export default AddPost;
 
 const StEmptyCard = styled.div`
     display: flex;

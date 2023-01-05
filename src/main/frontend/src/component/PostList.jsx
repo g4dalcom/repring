@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import styled from "styled-components";
-import AddCard from "./AddCard";
+import AddPost from "./AddPost";
 
-function Card() {
+function PostList() {
 
     const [posts, setPosts] = useState([]);
 
@@ -40,14 +40,14 @@ function Card() {
         <>
             <StBackGround>
                 {postCard}
-                <AddCard />
+                <AddPost />
             </StBackGround>
         </>
 
     )
 }
 
-export default Card;
+export default PostList;
 
 const StCard = styled.div`
     display: flex;

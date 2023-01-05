@@ -1,13 +1,13 @@
 import React from "react";
 import Header from "./Header";
-import Card from "./Card";
+import PostList from "./PostList";
 import styled from "styled-components";
 
 const Home = () => {
     return (
         <StHome>
             <Header />
-            <Card />
+            <PostList />
         </StHome>
     )
 }
