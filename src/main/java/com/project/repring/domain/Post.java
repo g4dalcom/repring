@@ -1,6 +1,6 @@
 package com.project.repring.domain;
 
-import com.project.repring.dto.PostRequestDto;
+import com.project.repring.dto.PostDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,7 +35,7 @@ public class Post extends BaseEntity {
         this.content = content;
     }
 
-    public void update(PostRequestDto postRequestDto) {
+    public void update(PostDto.Request postRequestDto) {
         this.title = postRequestDto.getTitle();
         this.content = postRequestDto.getContent();
     }

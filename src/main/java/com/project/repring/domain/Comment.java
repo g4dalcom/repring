@@ -1,6 +1,6 @@
 package com.project.repring.domain;
 
-import com.project.repring.dto.CommentRequestDto;
+import com.project.repring.dto.CommentDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,7 +30,7 @@ public class Comment extends BaseEntity {
         this.post = post;
     }
 
-    public void update(final CommentRequestDto commentRequestDto) {
+    public void update(final CommentDto.Request commentRequestDto) {
         this.comment = commentRequestDto.getComment();
     }
 }

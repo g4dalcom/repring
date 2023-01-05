@@ -1,7 +1,6 @@
 package com.project.repring.controller;
 
-import com.project.repring.dto.PostRequestDto;
-import com.project.repring.dto.PostResponseDto;
+import com.project.repring.dto.PostDto;
 import com.project.repring.repository.PostRepository;
 import com.project.repring.util.ControllerTest;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +20,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 @ExtendWith(RestDocumentationExtension.class)
 public class PostControllerTest extends ControllerTest {
 
-    private static final PostRequestDto NEW_POST_REQUEST = new PostRequestDto("타이틀", "본문내용");
+    private static final PostDto.Request NEW_POST_REQUEST = new PostDto.Request("타이틀", "본문내용");
 
     @MockBean
     PostRepository postRepository;
@@ -52,7 +51,7 @@ public class PostControllerTest extends ControllerTest {
     @DisplayName("게시글 불러오기 API")
     @Test
     void findPost() {
-        PostResponseDto postResponseDto = PostResponseDto.builder()
+        PostDto.Response postResponseDto = PostDto.Response.builder()
                         .id(1L)
                         .title("테스트 제목")
                         .content("테스트 본문")
@@ -72,7 +71,7 @@ public class PostControllerTest extends ControllerTest {
     @DisplayName("게시글 수정 API")
     @Test
     void updatePost() {
-        PostResponseDto postResponseDto = PostResponseDto.builder()
+        PostDto.Response postResponseDto = PostDto.Response.builder()
                         .id(1L)
                         .title("수정 제목")
                         .content("수정 본문")

@@ -36,7 +36,8 @@ class MemberControllerTest extends ControllerTest {
         Member member1 = Member.builder()
                 .id(1L)
                 .email("user1@email.com")
-                .name("user1")
+                .nickname("user1")
+                .password("password")
                 .build();
 
         lenient().when(memberRepository.findById(anyLong())).thenReturn(Optional.of(member1));
@@ -50,8 +51,9 @@ class MemberControllerTest extends ControllerTest {
                         ),
                         responseFields(
                                 fieldWithPath("id").description("아이디"),
-                                fieldWithPath("name").description("이름"),
-                                fieldWithPath("email").description("이메일")
+                                fieldWithPath("nickname").description("닉네임"),
+                                fieldWithPath("email").description("이메일"),
+                                fieldWithPath("password").description("비밀번호")
                             )
                 ));
     }

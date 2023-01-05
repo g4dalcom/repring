@@ -2,8 +2,7 @@ package com.project.repring.service;
 
 import com.project.repring.domain.Comment;
 import com.project.repring.domain.Post;
-import com.project.repring.dto.CommentRequestDto;
-import com.project.repring.dto.CommentResponseDto;
+import com.project.repring.dto.CommentDto;
 import com.project.repring.exception.CustomException;
 import com.project.repring.exception.ErrorCode;
 import com.project.repring.repository.CommentRepository;
@@ -23,7 +22,7 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     @Transactional
-    public Long createComment(Long post_id, CommentRequestDto commentRequestDto) {
+    public Long createComment(Long post_id, CommentDto.Request commentRequestDto) {
 
         Post post = postRepository.findById(post_id)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_POST));
@@ -38,11 +37,11 @@ public class CommentService {
     }
 
     @Transactional
-    public List<CommentResponseDto> findAllComments(Long post_Id) {
+    public List<CommentDto.Response> findAllComments(Long post_Id) {
         List<Comment> commentList = commentRepository.findAllByPostId(post_Id);
 
-        List<CommentResponseDto> responseDtoList = commentList.stream().map(p -> CommentResponseDto.builder()
-                .id(p.getId())
+        List<CommentDto.Response> responseDtoList = commentList.stream().map(p -> CommentDto.Response.builder()
+                .commentId(p.getId())
                 .postId(p.getPost().getId())
                 .comment(p.getComment())
                 .build()).collect(Collectors.toList());
@@ -51,7 +50,7 @@ public class CommentService {
     }
 
     @Transactional
-    public void updateComment(Long commentId, CommentRequestDto commentRequestDto) {
+    public void updateComment(Long commentId, CommentDto.Request commentRequestDto) {
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_COMMENT));
 

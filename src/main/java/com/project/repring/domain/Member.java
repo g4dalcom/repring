@@ -24,7 +24,8 @@ public class Member {
     private String password;
 
     @Builder
-    public Member(final String email, final String nickname, final String password) {
+    public Member(final Long id, final String email, final String nickname, final String password) {
+        this.id = id;
         this.email = email;
         this.nickname = nickname;
         this.password = password;

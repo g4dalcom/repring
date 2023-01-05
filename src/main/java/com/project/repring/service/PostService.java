@@ -1,8 +1,7 @@
 package com.project.repring.service;
 
 import com.project.repring.domain.Post;
-import com.project.repring.dto.PostRequestDto;
-import com.project.repring.dto.PostResponseDto;
+import com.project.repring.dto.PostDto;
 import com.project.repring.exception.CustomException;
 import com.project.repring.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +19,7 @@ public class PostService {
     private final PostRepository postRepository;
 
     @Transactional
-    public Long createPost(PostRequestDto requestDto) {
+    public Long createPost(PostDto.Request requestDto) {
 
         Post post = requestDto.toEntity();
         postRepository.save(post);
@@ -29,10 +28,10 @@ public class PostService {
     }
 
     @Transactional
-    public List<PostResponseDto> findAllPosts() {
+    public List<PostDto.Response> findAllPosts() {
         List<Post> posts = postRepository.findAll();
 
-        List<PostResponseDto> responseDtoList = posts.stream().map(p -> PostResponseDto.builder()
+        List<PostDto.Response> responseDtoList = posts.stream().map(p -> PostDto.Response.builder()
                 .id(p.getId())
                 .title(p.getTitle())
                 .content(p.getContent())
@@ -43,21 +42,21 @@ public class PostService {
     }
 
     @Transactional
-    public PostResponseDto findPost(Long post_id) {
+    public PostDto.Response findPost(Long post_id) {
         Post post = postRepository.findById(post_id).orElseThrow(() -> new CustomException(NOT_FOUND_POST));
 
-        return PostResponseDto.of(post);
+        return PostDto.Response.of(post);
 
     }
 
     @Transactional
-    public PostResponseDto updatePost(Long post_id, PostRequestDto postRequestDto) {
+    public PostDto.Response updatePost(Long post_id, PostDto.Request postRequestDto) {
         Post post = postRepository.findById(post_id).orElseThrow(() -> new CustomException(NOT_FOUND_POST));
 
         post.update(postRequestDto);
         postRepository.save(post);
 
-        return PostResponseDto.of(post);
+        return PostDto.Response.of(post);
     }
 
     @Transactional

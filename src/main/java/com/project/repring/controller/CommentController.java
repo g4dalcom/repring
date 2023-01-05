@@ -1,7 +1,6 @@
 package com.project.repring.controller;
 
-import com.project.repring.dto.CommentRequestDto;
-import com.project.repring.dto.CommentResponseDto;
+import com.project.repring.dto.CommentDto;
 import com.project.repring.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +19,7 @@ public class CommentController {
 
     @PostMapping("/api/{postId}/comments")
     public ResponseEntity<Long> createComment(@PathVariable Long postId,
-                                              @RequestBody CommentRequestDto commentRequestDto) {
+                                              @RequestBody CommentDto.Request commentRequestDto) {
 
         Long commentId = commentService.createComment(postId, commentRequestDto);
         log.info("commentId = {}", commentId);
@@ -29,14 +28,14 @@ public class CommentController {
     }
 
     @GetMapping("/api/{postId}/comments")
-    public ResponseEntity<List<CommentResponseDto>> findAllComments(@PathVariable Long postId) {
+    public ResponseEntity<List<CommentDto.Response>> findAllComments(@PathVariable Long postId) {
         log.info("postId = {}, commentsCount = {}", postId, commentService.findAllComments(postId).size());
         return ResponseEntity.ok().body(commentService.findAllComments(postId));
     }
 
     @PutMapping("/api/{postId}/comments/{commentId}")
     public ResponseEntity<Void> updateComment(@PathVariable Long commentId,
-                                              @RequestBody CommentRequestDto commentRequestDto) {
+                                              @RequestBody CommentDto.Request commentRequestDto) {
 
         log.info("commentId = {}", commentId);
         commentService.updateComment(commentId, commentRequestDto);

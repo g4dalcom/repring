@@ -1,6 +1,6 @@
 package com.project.repring.controller;
 
-import com.project.repring.dto.CommentRequestDto;
+import com.project.repring.dto.CommentDto;
 import com.project.repring.repository.CommentRepository;
 import com.project.repring.util.ControllerTest;
 import org.junit.jupiter.api.DisplayName;
@@ -23,7 +23,7 @@ class CommentControllerTest extends ControllerTest {
     @Test
     void createComment() {
 
-        CommentRequestDto commentRequestDto = new CommentRequestDto("코멘트 테스트");
+        CommentDto.Request commentRequestDto = new CommentDto.Request("코멘트 테스트");
 
         restDocs
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -50,7 +50,7 @@ class CommentControllerTest extends ControllerTest {
     @Test
     void updateComment() {
 
-        CommentRequestDto commentRequestDto = new CommentRequestDto("코멘트 수정 테스트");
+        CommentDto.Request commentRequestDto = new CommentDto.Request("코멘트 수정 테스트");
 
         restDocs
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
