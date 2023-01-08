@@ -23,11 +23,16 @@ public class Member {
     @Column(nullable = false)
     private String password;
 
+    @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false)
+    private MemberRoleEnum role;
+
     @Builder
-    public Member(final Long id, final String email, final String nickname, final String password) {
+    public Member(final Long id, final String email, final String nickname, final String password, final MemberRoleEnum role) {
         this.id = id;
         this.email = email;
         this.nickname = nickname;
         this.password = password;
+        this.role = role;
     }
 }
