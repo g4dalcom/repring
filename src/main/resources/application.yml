@@ -40,3 +40,5 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL57Dialect
         globally_quoted_identifiers: true
+
+# JWT
