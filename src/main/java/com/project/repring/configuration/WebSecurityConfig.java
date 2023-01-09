@@ -1,5 +1,7 @@
 package com.project.repring.configuration;
 
+import com.project.repring.jwt.JwtAccessDeniedHandler;
+import com.project.repring.jwt.JwtAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +23,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -29,8 +34,9 @@ public class WebSecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web -> web
-                            .ignoring().antMatchers("/h2-console/**")
-                            .requestMatchers(PathRequest.toStaticResources().atCommonLocations()));
+                .ignoring().antMatchers("/h2-console/**")
+                .mvcMatchers("/docs/**")
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()));
     }
 
     @Bean
@@ -38,10 +44,17 @@ public class WebSecurityConfig {
         http
                 .csrf().disable()
                 .cors().configurationSource(corsConfigurationSource())
-                .and()
-                .headers().frameOptions().sameOrigin()     // ClickJacking 방지를 위한 X-Frame-Option
-                .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);     // 토큰 인증이므로 세션 Stateless
+
+                .and()      // ClickJacking 방지를 위한 X-Frame-Option
+                .headers().frameOptions().sameOrigin()
+
+                .and()      // 토큰 인증이므로 세션 Stateless
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
+                .and()      // Exception Handling
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler);
 
         http.authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**/*").permitAll()
