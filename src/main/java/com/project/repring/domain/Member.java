@@ -15,7 +15,7 @@ public class Member {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, unique = true)
-    private String email;
+    private String username;        // 이메일
 
     @Column(nullable = false, unique = true)
     private String nickname;
@@ -28,9 +28,9 @@ public class Member {
     private MemberRoleEnum role;
 
     @Builder
-    public Member(final Long id, final String email, final String nickname, final String password, final MemberRoleEnum role) {
+    public Member(final Long id, final String username, final String nickname, final String password, final MemberRoleEnum role) {
         this.id = id;
-        this.email = email;
+        this.username = username;
         this.nickname = nickname;
         this.password = password;
         this.role = role;
