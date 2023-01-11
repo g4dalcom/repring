@@ -449,6 +449,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_유저">유저</a>
 <ul class="sectlevel2">
 <li><a href="#_유저_정보_조회">유저 정보 조회</a></li>
+<li><a href="#_회원가입">회원가입</a></li>
 </ul>
 </li>
 <li><a href="#_게시글">게시글</a>
@@ -456,6 +457,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_게시글_등록">게시글 등록</a></li>
 <li><a href="#_게시글_전체_조회">게시글 전체 조회</a></li>
 <li><a href="#_게시글_단일_조회">게시글 단일 조회</a></li>
+<li><a href="#_게시글_수정">게시글 수정</a></li>
+<li><a href="#_게시글_삭제">게시글 삭제</a></li>
+</ul>
+</li>
+<li><a href="#_코멘트">코멘트</a>
+<ul class="sectlevel2">
+<li><a href="#_코멘트_등록">코멘트 등록</a></li>
+<li><a href="#_코멘트_조회">코멘트 조회</a></li>
+<li><a href="#_게시글_수정_2">게시글 수정</a></li>
+<li><a href="#_게시글_삭제_2">게시글 삭제</a></li>
 </ul>
 </li>
 </ul>
@@ -482,10 +493,44 @@ Host: localhost:8080</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 Content-Type: application/json
-Content-Length: 33
+Content-Length: 53
 
-{"id":1,"email":null,"name":null}</code></pre>
+{"id":1,"email":null,"nickname":null,"password":null}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_회원가입"><a class="link" href="#_회원가입">회원가입</a></h3>
+<div class="sect3">
+<h4 id="_회원가입_http_request"><a class="link" href="#_회원가입_http_request">HTTP request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/members/register HTTP/1.1
+Content-Type: application/json
+Content-Type: application/json
+Content-Length: 121
+Host: localhost:8080
+
+{
+  "username" : "user1@user.com",
+  "nickname" : "nickname1",
+  "password" : "1234",
+  "passwordConfirm" : "1234"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_회원가입_http_response"><a class="link" href="#_회원가입_http_response">HTTP response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 201 Created
+Location: /</code></pre>
 </div>
 </div>
 </div>
@@ -580,13 +625,180 @@ Content-Length: 84
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_게시글_수정"><a class="link" href="#_게시글_수정">게시글 수정</a></h3>
+<div class="sect3">
+<h4 id="_게시글_수정_http_request"><a class="link" href="#_게시글_수정_http_request">HTTP request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /api/posts/1 HTTP/1.1
+Content-Type: application/json
+Content-Type: application/json
+Content-Length: 78
+Host: localhost:8080
+
+{
+  "id" : 1,
+  "title" : "수정 제목",
+  "content" : "수정 본문"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_게시글_수정_http_response"><a class="link" href="#_게시글_수정_http_response">HTTP response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 78
+
+{
+  "id" : 1,
+  "title" : "수정 제목",
+  "content" : "수정 본문"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_게시글_삭제"><a class="link" href="#_게시글_삭제">게시글 삭제</a></h3>
+<div class="sect3">
+<h4 id="_게시글_삭제_http_request"><a class="link" href="#_게시글_삭제_http_request">HTTP request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /api/posts/1 HTTP/1.1
+Content-Type: application/json
+Content-Type: application/json
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_게시글_삭제_http_response"><a class="link" href="#_게시글_삭제_http_response">HTTP response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 204 No Content</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_코멘트"><a class="link" href="#_코멘트">코멘트</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_코멘트_등록"><a class="link" href="#_코멘트_등록">코멘트 등록</a></h3>
+<div class="sect3">
+<h4 id="_코멘트_등록_http_request"><a class="link" href="#_코멘트_등록_http_request">HTTP request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/1/comments HTTP/1.1
+Content-Type: application/json
+Content-Type: application/json
+Content-Length: 41
+Host: localhost:8080
+
+{
+  "comment" : "코멘트 테스트"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_코멘트_등록_http_response"><a class="link" href="#_코멘트_등록_http_response">HTTP response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 201 Created
+Location: /0</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_코멘트_조회"><a class="link" href="#_코멘트_조회">코멘트 조회</a></h3>
+<div class="sect3">
+<h4 id="_코멘트_조회_http_request"><a class="link" href="#_코멘트_조회_http_request">HTTP request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/1/comments HTTP/1.1
+Content-Type: application/json
+Content-Type: application/json
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_코멘트_조회_http_response"><a class="link" href="#_코멘트_조회_http_response">HTTP response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 3
+
+[ ]</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_게시글_수정_2"><a class="link" href="#_게시글_수정_2">게시글 수정</a></h3>
+<div class="sect3">
+<h4 id="_게시글_수정_2_http_request"><a class="link" href="#_게시글_수정_2_http_request">HTTP request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /api/1/comments/1 HTTP/1.1
+Content-Type: application/json
+Content-Type: application/json
+Content-Length: 48
+Host: localhost:8080
+
+{
+  "comment" : "코멘트 수정 테스트"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_게시글_수정_2_http_response"><a class="link" href="#_게시글_수정_2_http_response">HTTP response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 204 No Content</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_게시글_삭제_2"><a class="link" href="#_게시글_삭제_2">게시글 삭제</a></h3>
+<div class="sect3">
+<h4 id="_게시글_삭제_2_http_request"><a class="link" href="#_게시글_삭제_2_http_request">HTTP request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /api/1/comments/1 HTTP/1.1
+Content-Type: application/json
+Content-Type: application/json
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_게시글_삭제_2_http_response"><a class="link" href="#_게시글_삭제_2_http_response">HTTP response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 204 No Content</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-12-18 20:26:33 +0900
+Last updated 2022-12-22 14:57:36 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

@@ -1,6 +1,7 @@
 package com.project.repring.controller;
 
 import com.project.repring.domain.Member;
+import com.project.repring.dto.LoginDto;
 import com.project.repring.dto.MemberDto;
 import com.project.repring.dto.RegisterDto;
 import com.project.repring.service.MemberService;
@@ -27,4 +28,10 @@ public class MemberController {
     public ResponseEntity<MemberDto.Response> register(@RequestBody RegisterDto.Request request) {
         return ResponseEntity.created(URI.create("/")).body(memberService.register(request));
     }
+
+    @PostMapping("/api/members/login")
+    public ResponseEntity<MemberDto.LoginResponse> login(@RequestBody LoginDto request) {
+        return ResponseEntity.ok(memberService.login(request));
+    }
+
 }

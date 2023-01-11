@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
@@ -21,17 +22,22 @@ public class TokenProvider {
     private final long accessTokenValidityInMilliseconds;
     private final long refreshTokenValidityInMilliseconds;
     private final UserDetailsService userDetailsService;
+    private final HttpServletResponse response;
     public static final String BEARER_TYPE = "bearer ";
+    public static final String AUTH_HEADER = "Authorization";
+    public static final String REFRESH_HEADER = "RefreshToken";
 
     public TokenProvider(@Value("${security.jwt.token.secret-key}") final String secretKey,
                          @Value("${security.jwt.token.access-token-expire-length}") final long accessTokenValidityInMilliseconds,
                          @Value("${security.jwt.token.refresh-token-expire-length}") final long refreshTokenValidityInMilliseconds,
-                         final UserDetailsService userDetailsService) {
+                         final UserDetailsService userDetailsService,
+                         final HttpServletResponse response) {
 
         this.secretKey = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
         this.accessTokenValidityInMilliseconds = accessTokenValidityInMilliseconds;
         this.refreshTokenValidityInMilliseconds = refreshTokenValidityInMilliseconds;
         this.userDetailsService = userDetailsService;
+        this.response = response;
     }
 
     public TokenDto generateToken(String userPK) {
@@ -44,6 +50,7 @@ public class TokenProvider {
                 .setExpiration(accessTokenExpiresIn)
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
+        response.addHeader(AUTH_HEADER, accessToken);
 
         Date refreshTokenExpiresIn = new Date(now.getTime() + refreshTokenValidityInMilliseconds);
         String refreshToken = Jwts.builder()
@@ -51,6 +58,7 @@ public class TokenProvider {
                 .setExpiration(refreshTokenExpiresIn)
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
+        response.addHeader(REFRESH_HEADER, refreshToken);
 
         return TokenDto.builder()
                 .grantType(BEARER_TYPE)

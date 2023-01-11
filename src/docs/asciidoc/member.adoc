@@ -5,3 +5,6 @@ operation::get-member[snippets='http-request,http-response']
 
 === 회원가입
 operation::member/register/success[snippets='http-request,http-response']
+
+=== 로그인
+operation::member/login/success[snippets='http-request,http-response']

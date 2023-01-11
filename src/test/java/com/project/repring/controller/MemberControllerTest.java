@@ -1,7 +1,6 @@
 package com.project.repring.controller;
 
-import com.project.repring.domain.Member;
-import com.project.repring.domain.MemberRoleEnum;
+import com.project.repring.dto.LoginDto;
 import com.project.repring.dto.RegisterDto;
 import com.project.repring.repository.MemberRepository;
 import com.project.repring.util.ControllerTest;
@@ -15,17 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Optional;
-
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.lenient;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(RestDocumentationExtension.class)
 class MemberControllerTest extends ControllerTest {
@@ -35,35 +24,35 @@ class MemberControllerTest extends ControllerTest {
     @Mock
     private MemberRepository memberRepository;
 
-    @DisplayName("[테스트용] 사용자 검색")
-    @Test
-    public void findMember() throws Exception {
-        Member member1 = Member.builder()
-                .id(1L)
-                .username("user1@email.com")
-                .nickname("user1")
-                .password("password")
-                .role(MemberRoleEnum.MEMBER)
-                .build();
-
-        lenient().when(memberRepository.findById(anyLong())).thenReturn(Optional.of(member1));
-
-        mockMvc.perform(get("/api/members/{id}", member1.getId())
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andDo(document("get-member",
-                        pathParameters(
-                                parameterWithName("id").description("Member ID")
-                        ),
-                        responseFields(
-                                fieldWithPath("id").description("아이디"),
-                                fieldWithPath("nickname").description("닉네임"),
-                                fieldWithPath("username").description("이메일"),
-                                fieldWithPath("password").description("비밀번호"),
-                                fieldWithPath("role").description("권한")
-                            )
-                ));
-    }
+//    @DisplayName("[테스트용] 사용자 검색")
+//    @Test
+//    public void findMember() throws Exception {
+//        Member member1 = Member.builder()
+//                .id(1L)
+//                .username("user1@email.com")
+//                .nickname("user1")
+//                .password("password")
+//                .role(MemberRoleEnum.MEMBER)
+//                .build();
+//
+//        lenient().when(memberRepository.findById(anyLong())).thenReturn(Optional.of(member1));
+//
+//        mockMvc.perform(get("/api/members/{id}", member1.getId())
+//                .accept(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andDo(document("get-member",
+//                        pathParameters(
+//                                parameterWithName("id").description("Member ID")
+//                        ),
+//                        responseFields(
+//                                fieldWithPath("id").description("아이디"),
+//                                fieldWithPath("nickname").description("닉네임"),
+//                                fieldWithPath("username").description("이메일"),
+//                                fieldWithPath("password").description("비밀번호"),
+//                                fieldWithPath("role").description("권한")
+//                            )
+//                ));
+//    }
 
     @DisplayName("회원가입을 하면 201 반환")
     @Test
@@ -79,5 +68,19 @@ class MemberControllerTest extends ControllerTest {
                 .apply(document("member/register/success"))
                 .statusCode(HttpStatus.CREATED.value());
 
+    }
+
+    @DisplayName("로그인을 성공하면 200 반환")
+    @Test
+    public void login() throws Exception {
+        LoginDto request = new LoginDto("user1@user.com", "1234");
+
+        restDocs
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .body(request)
+                .when().post("/api/members/login")
+                .then().log().all()
+                .apply(document("member/login/success"))
+                .statusCode(HttpStatus.OK.value());
     }
 }

@@ -1,6 +1,7 @@
 package com.project.repring.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,6 +23,7 @@ public class RefreshToken {
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
+    @Builder
     public RefreshToken(final String refreshToken, final Member member) {
         this.refreshToken = refreshToken;
         this.member = member;
