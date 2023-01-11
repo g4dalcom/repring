@@ -58,7 +58,7 @@ public class WebSecurityConfig {
 
         http.authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**/*").permitAll()
-                .antMatchers("/api/**").permitAll()
+                .antMatchers("/api/**", "/", "/**").permitAll()
                 .anyRequest().authenticated();
 
         return http.build();

@@ -4,6 +4,7 @@ import com.project.repring.controller.CommentController;
 import com.project.repring.controller.MemberController;
 import com.project.repring.controller.PostController;
 import com.project.repring.service.CommentService;
+import com.project.repring.service.MemberService;
 import com.project.repring.service.PostService;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import io.restassured.module.mockmvc.specification.MockMvcRequestSpecification;
@@ -36,6 +37,9 @@ public class ControllerTest {
 
     @MockBean
     public CommentService commentService;
+
+    @MockBean
+    public MemberService memberService;
 
     /**
      * @param webApplicationContext @AutoConfigureMockMvc 로 구현 가능

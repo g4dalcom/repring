@@ -2,3 +2,6 @@
 
 === 유저 정보 조회
 operation::get-member[snippets='http-request,http-response']
+
+=== 회원가입
+operation::member/register/success[snippets='http-request,http-response']
