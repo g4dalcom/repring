@@ -1,37 +1,48 @@
-import React, {useEffect, useState} from "react";
-import axios from "axios";
 import styled from "styled-components";
 import AddPost from "./AddPost";
+import { useQuery} from "react-query";
+import axios from "axios";
 
 function PostList() {
 
-    const [posts, setPosts] = useState([]);
-
-    const onDeleteHandler = async (id) => {
-        await axios.delete(`http://localhost:8080/api/posts/${id}`);
-        window.location.reload();
+    const getPosts = async () => {
+        const { data } = await axios.get("http://localhost:8080/api/posts");
+        return data;
     };
 
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const response = await axios.get("http://localhost:8080/api/posts");
-                setPosts(response.data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        fetchData();
-    }, []);
+    const {status, data, error} = useQuery("Posts", getPosts);
 
-    const postCard = posts.map(post => {
+    if (status === "loading") console.log("loading..");
+    if (status === "error") console.log("error!", error);
+    if (status === "success") console.log("success!", data);
+
+    // const [posts, setPosts] = useState([]);
+    //
+    // const onDeleteHandler = async (id) => {
+    //     await axios.delete(`http://localhost:8080/api/posts/${id}`);
+    //     window.location.reload();
+    // };
+    //
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         try {
+    //             const response = await axios.get("http://localhost:8080/api/posts");
+    //             setPosts(response.data);
+    //         } catch (error) {
+    //             console.log(error);
+    //         }
+    //     }
+    //     fetchData();
+    // }, []);
+    //
+    const postCard = data && data.map((post) => {
         return (
             <StCard key={post.id}>
                 <ul>
                     <li>{post.title}</li>
                     <li>{post.content}</li>
                 </ul>
-                <button value={post.id} onClick={() => onDeleteHandler(post.id)}>삭제하기</button>
+                {/*<button value={post.id} onClick={() => onDeleteHandler(post.id)}>삭제하기</button>*/}
             </StCard>
         )
     });
