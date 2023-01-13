@@ -5,6 +5,7 @@ import axios from "axios";
 
 function PostList() {
     const queryClient = useQueryClient();
+
     const deletePost = useMutation((id) => {
         return axios.delete(`http://localhost:8080/api/posts/${id}`)
         },
