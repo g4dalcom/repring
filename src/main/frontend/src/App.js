@@ -1,7 +1,7 @@
 import './App.css';
 import Home from "./component/Home";
-import {BrowserRouter} from "react-router-dom";
 import {QueryClient, QueryClientProvider, QueryCache} from "react-query";
+import React from "react";
 
 function App() {
 
@@ -18,9 +18,7 @@ function App() {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <BrowserRouter>
-                <Home />
-            </BrowserRouter>
+            <Home />
         </QueryClientProvider>
     )
 

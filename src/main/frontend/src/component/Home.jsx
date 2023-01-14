@@ -1,13 +1,13 @@
 import React from "react";
 import Header from "./Header";
-import PostList from "./PostList";
 import styled from "styled-components";
+import {Router} from "./Router";
 
 const Home = () => {
     return (
         <StHome>
             <Header />
-            <PostList />
+            <Router />
         </StHome>
     )
 }

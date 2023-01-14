@@ -9,8 +9,9 @@ const Navigator = () => {
     return (
         <StNavi>
             <StText>
-                <StLogo onClick={() => {navigate("/")}}>Repring</StLogo>
-                <StLoginBtn onClick={() => {navigate("/login")}}>로그인</StLoginBtn>
+                <StLogo onClick={() => navigate("/")}>Repring</StLogo>
+                <StLoginBtn onClick={() => navigate("/login")}>로그인</StLoginBtn>
+                <StRegisterBtn onClick={() => navigate("/register")}>회원가입</StRegisterBtn>
             </StText>
         </StNavi>
     )
@@ -44,6 +45,14 @@ const StLogo = styled.div`
 `;
 
 const StLoginBtn = styled.div`
+    margin-right: 50px;
+    cursor: pointer;
+    &:hover {
+        color: white;
+    }
+`;
+
+const StRegisterBtn = styled.div`
     margin-right: 200px;
     cursor: pointer;
     &:hover {

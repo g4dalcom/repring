@@ -68,6 +68,7 @@ const StCard = styled.div`
 
 const StBackGround = styled.div`
     display: flex;
+    height: 80vh;
     align-items: center;
     justify-content: center;
 `;
