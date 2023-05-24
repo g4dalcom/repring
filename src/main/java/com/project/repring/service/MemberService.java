@@ -12,9 +12,11 @@ import com.project.repring.jwt.TokenProvider;
 import com.project.repring.repository.MemberRepository;
 import com.project.repring.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -46,6 +48,8 @@ public class MemberService {
             throw new CustomException(ErrorCode.NOT_MATCH_PASSWORD);
 
         TokenDto token = tokenProvider.generateToken(request.getUsername());
+        log.info("token = {}", token);
+
         RefreshToken refreshToken = RefreshToken.builder()
                         .refreshToken(token.getRefreshToken())
                         .member(member)

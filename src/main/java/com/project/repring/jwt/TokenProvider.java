@@ -3,6 +3,7 @@ package com.project.repring.jwt;
 import com.project.repring.dto.TokenDto;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
+@Slf4j
 @Component
 public class TokenProvider {
 
@@ -41,6 +43,7 @@ public class TokenProvider {
     }
 
     public TokenDto generateToken(String userPK) {
+        log.info("userPK = {}", userPK);
         Claims claims = Jwts.claims().setSubject(userPK);
         Date now = new Date();
         Date accessTokenExpiresIn = new Date(now.getTime() + accessTokenValidityInMilliseconds);
@@ -59,6 +62,8 @@ public class TokenProvider {
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
         response.addHeader(REFRESH_HEADER, refreshToken);
+
+        log.info("generate = {}", accessToken);
 
         return TokenDto.builder()
                 .grantType(BEARER_TYPE)
@@ -80,25 +85,20 @@ public class TokenProvider {
 
     public Authentication getAuthentication(String jwtToken) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserPK(jwtToken));
+        log.info("tp useDetails = {}", userDetails);
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
     public boolean validateToken(String jwtToken) {
-
         try {
             Jws<Claims> claims = Jwts.parserBuilder()
                     .setSigningKey(secretKey)
                     .build()
-                    .parseClaimsJws(setTokenName(jwtToken));
+                    .parseClaimsJws(jwtToken);
             return claims.getBody().getExpiration().after(new Date());
         }
         catch (JwtException | IllegalArgumentException e) {
             return false;
         }
-    }
-
-    // Todo : 필요 여부 확인
-    private String setTokenName(String bearerToken) {
-        return bearerToken.substring(7);
     }
 }

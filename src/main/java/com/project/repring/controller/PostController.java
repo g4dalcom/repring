@@ -1,10 +1,12 @@
 package com.project.repring.controller;
 
 import com.project.repring.dto.PostDto;
+import com.project.repring.jwt.UserDetailsImpl;
 import com.project.repring.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -17,8 +19,10 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping("/api/posts")
-    public ResponseEntity<Void> createPost(@RequestBody PostDto.Request requestDto) {
-        Long postId = postService.createPost(requestDto);
+    public ResponseEntity<Void> createPost(@RequestBody PostDto.Request requestDto,
+                                           @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        log.info("userDetails = {}", userDetails);
+        Long postId = postService.createPost(requestDto, userDetails);
         log.info("postId = {}", postId);
 
         return ResponseEntity.created(URI.create("/" + postId)).build();
