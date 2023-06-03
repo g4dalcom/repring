@@ -53,7 +53,8 @@ public class TokenProvider {
                 .setExpiration(accessTokenExpiresIn)
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
-        response.addHeader(AUTH_HEADER, accessToken);
+        response.addHeader(AUTH_HEADER, BEARER_TYPE + accessToken);
+        log.info("get Header = {}", response.getHeader(AUTH_HEADER));
 
         Date refreshTokenExpiresIn = new Date(now.getTime() + refreshTokenValidityInMilliseconds);
         String refreshToken = Jwts.builder()

@@ -56,7 +56,7 @@ public class MemberService {
                         .build();
         tokenRepository.save(refreshToken);
 
-        return MemberDto.LoginResponse.of(member, token.getAccessToken(), token.getRefreshToken());
+        return MemberDto.LoginResponse.of(member, "bearer " + token.getAccessToken(), token.getRefreshToken());
     }
 
 }
