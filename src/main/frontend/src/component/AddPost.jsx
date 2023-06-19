@@ -11,7 +11,7 @@ const AddPost = () => {
 
   return (
     <StEmptyCard>
-      <button onClick={showModal}>추가하기!</button>
+      <button onClick={showModal}>추가하기</button>
       {modalUp && <Modal setModalUp={setModalUp} />}
     </StEmptyCard>
   );
